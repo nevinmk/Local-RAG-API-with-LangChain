@@ -57,6 +57,41 @@
   margin-bottom: 0.5rem;
 }
 
+.ingest {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ingest input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.ingest button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background: #16a34a;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.ingest button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ingest-status {
+  color: #15803d;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
 .composer {
   display: flex;
   gap: 0.5rem;
