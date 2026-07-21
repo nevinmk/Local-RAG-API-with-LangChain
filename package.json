@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "predev": "kill-port 3000",
     "dev": "concurrently -n server,client -c blue,green \"npm --prefix server run dev\" \"npm --prefix client run dev\""
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "kill-port": "^2.0.1"
   }
 }

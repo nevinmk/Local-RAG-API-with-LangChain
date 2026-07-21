@@ -32,9 +32,9 @@ function Composer({ onSend }: Props) {
         type="text"
         value={question}
         onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Ask a question..."
+        placeholder="Ask a question about your documents…"
       />
-      <button type="submit" disabled={!question.trim()}>
+      <button type="submit" className="btn btn-primary" disabled={!question.trim()}>
         Send
       </button>
     </form>

@@ -34,11 +34,17 @@ graph LR
     useChatStream -- "POST /ask/stream (SSE)" --> AskStreamRoute
 
     ChatRoute --> Ollama
-    AskRoute --> Ollama
-    AskStreamRoute --> Ollama
-    IngestRoute --> ChromaDB
-    AskRoute --> ChromaDB
-    AskStreamRoute --> ChromaDB
+
+    IngestRoute -- "1. embed chunks" --> Ollama
+    IngestRoute -- "2. store embeddings" --> ChromaDB
+
+    AskRoute -- "1. embed query" --> Ollama
+    AskRoute -- "2. similarity search" --> ChromaDB
+    AskRoute -- "3. generate answer" --> Ollama
+
+    AskStreamRoute -- "1. embed query" --> Ollama
+    AskStreamRoute -- "2. similarity search" --> ChromaDB
+    AskStreamRoute -- "3. stream answer" --> Ollama
 ```
 
 - **`client/`** — React + Vite single-page UI with an ingest form

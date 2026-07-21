@@ -31,6 +31,11 @@ function MessageList({ messages, loading }: Props) {
 
   return (
     <div className="messages" ref={containerRef} onScroll={handleScroll}>
+      {messages.length === 0 && (
+        <div className="messages-empty">
+          Ask a question about your documents to get started.
+        </div>
+      )}
       {messages.map((m, i) => (
         <MessageBubble
           key={i}

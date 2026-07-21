@@ -41,6 +41,9 @@ ingestRouter.post("/", async (req, res) => {
 
     res.json({
       message: `Ingested ${chunks.length} chunks from ${files.length} files`,
+      directory,
+      files: files.length,
+      chunks: chunks.length,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Ingestion failed";
