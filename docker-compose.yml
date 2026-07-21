@@ -1,0 +1,21 @@
+# Top-level key listing every container Compose should run
+services:
+  # Service name - becomes the container's hostname on the Compose network
+  # (other services can reach it at chromadb:8000)
+  chromadb:
+    # Pull this pre-built image from Docker Hub instead of building locally
+    image: chromadb/chroma
+    # Port mappings between host and container
+    ports:
+      # "<host-port>:<container-port>" - exposes ChromaDB on localhost:8000
+      - "8000:8000"
+    # Volume mounts for this service
+    volumes:
+      # "<volume-name>:<path-in-container>" - persists data at ChromaDB's
+      # default data directory so it survives container recreation
+      - chroma-data:/chroma/chroma
+
+# Top-level key where named volumes must be declared before use
+volumes:
+  # Empty body = use Docker's default settings; Docker manages the storage
+  chroma-data:
