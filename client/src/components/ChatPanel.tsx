@@ -1,8 +1,14 @@
 import { useState } from "react";
 
+interface Source {
+  source: string;
+  content: string;
+}
+
 interface Message {
   role: "user" | "assistant";
   content: string;
+  sources?: Source[];
 }
 
 function ChatPanel() {
@@ -22,7 +28,7 @@ function ChatPanel() {
     setError(null);
 
     try {
-      const res = await fetch("/chat", {
+      const res = await fetch("/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ question: trimmed }),
@@ -31,7 +37,7 @@ function ChatPanel() {
       const data = await res.json();
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.answer },
+        { role: "assistant", content: data.answer, sources: data.sources },
       ]);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -49,6 +55,19 @@ function ChatPanel() {
               {m.role === "user" ? "You" : "Assistant"}
             </span>
             <p>{m.content}</p>
+            {m.sources && m.sources.length > 0 && (
+              <div className="sources">
+                <span className="sources-label">Sources</span>
+                <ul>
+                  {m.sources.map((s, j) => (
+                    <li key={j}>
+                      <span className="source-name">{s.source}</span>
+                      <span className="source-snippet">{s.content}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
         {loading && <div className="message assistant pending">Thinking…</div>}

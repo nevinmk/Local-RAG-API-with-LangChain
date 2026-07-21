@@ -10,6 +10,7 @@ export default defineConfig({
       // same-origin paths in dev without dealing with CORS.
       "/chat": "http://localhost:3000",
       "/ingest": "http://localhost:3000",
+      "/ask": "http://localhost:3000",
     },
   },
 })

@@ -51,6 +51,44 @@
   opacity: 0.6;
 }
 
+.sources {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sources-label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.6;
+  margin-bottom: 0.25rem;
+}
+
+.sources ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sources li {
+  font-size: 0.8rem;
+}
+
+.source-name {
+  display: block;
+  font-weight: 600;
+}
+
+.source-snippet {
+  display: block;
+  opacity: 0.7;
+}
+
 .error {
   color: #b91c1c;
   font-size: 0.875rem;
