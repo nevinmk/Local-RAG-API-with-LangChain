@@ -47,10 +47,6 @@
   color: #111;
 }
 
-.message.pending {
-  opacity: 0.6;
-}
-
 .sources {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
