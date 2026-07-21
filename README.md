@@ -46,6 +46,8 @@ graph LR
     AskStreamRoute <-- "2. similarity search" --> ChromaDB
     AskStreamRoute <-- "3. stream answer" --> Ollama
 
+    useChatStream -. "POST /ask (unused — not called by the UI)" .-> AskRoute
+
     classDef client fill:#2a78d6,stroke:#184f95,color:#ffffff;
     classDef server fill:#eb6834,stroke:#b84f26,color:#ffffff;
     classDef ollama fill:#1baf7a,stroke:#0f7a54,color:#ffffff;
@@ -57,11 +59,12 @@ graph LR
     class ChromaDB chroma;
 
     %% link indices: 0-2 UI composition (default, not a server call)
-    %% 5 = /chat, 3+6+7 = /ingest, 8-10 = /ask, 4+11-13 = /ask/stream
+    %% 5 = /chat, 3+6+7 = /ingest, 8-10 = /ask, 4+11-13 = /ask/stream, 14 = /ask (unused)
     linkStyle 5 stroke:#eda100,stroke-width:2px;
     linkStyle 3,6,7 stroke:#e87ba4,stroke-width:2px;
     linkStyle 8,9,10 stroke:#008300,stroke-width:2px;
     linkStyle 4,11,12,13 stroke:#4a3aa7,stroke-width:2px;
+    linkStyle 14 stroke:#898781,stroke-width:1.5px;
 ```
 
 Edge colors now follow which server POST route the call belongs to — every
@@ -73,6 +76,7 @@ end-to-end. Arrows stay bidirectional wherever the callee sends data back:
 - **magenta** — `POST /ingest` (client request + embed chunks + store embeddings)
 - **green** — `POST /ask` (embed query + similarity search + generate answer)
 - **violet** — `POST /ask/stream` (client request + embed query + similarity search + stream answer)
+- **dashed gray** — `POST /ask` is reachable but not called from the UI today (only `/ask/stream` is wired up); shown for completeness, not as a real traced path
 
 - **`client/`** — React + Vite single-page UI with an ingest form
   ([IngestForm.tsx](client/src/components/IngestForm.tsx)) and a chat panel
